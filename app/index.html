@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>AI - Map generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <!-- build:css styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="../bower/bootstrap/dist/css/bootstrap.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:css styles/main.css -->
+  <link href="css/main.css" rel="stylesheet">
+  <!-- endbuild -->
+</head>
+<body>
+  <div class="container">
+    <div ng-view></div>
+  </div>
+
+  <!-- build:js scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="../bower/jquery/dist/jquery.js"></script>
+  <script src="../bower/es5-shim/es5-shim.js"></script>
+  <script src="../bower/json3/lib/json3.min.js"></script>
+  <script src="../bower/angular/angular.js"></script>
+  <script src="../bower/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="../bower/moment/moment.js"></script>
+  <script src="../bower/angular-route/angular-route.js"></script>
+  <script src="../bower/underscore/underscore.js"></script>
+  <script src="../bower/processing/processing.js"></script>
+  <!-- endbower -->
+  <script src="../libs/rhill-voronoi-core.js"></script>
+  <!-- endbuild -->
+
+
+  <!-- build:js scripts/scripts.js -->
+  <script type="text/javascript" src="scripts/graphics.js"></script>
+  <script type="text/javascript" src="scripts/map_generator.js"></script>
+  <script type="text/javascript" src="scripts/map.js"></script>
+  <script type="text/javascript" src="scripts/init.js"></script>
+
+  <!-- Angular part -->
+  <script type="text/javascript" src="scripts/app/ngapp.js"></script>
+  <script type="text/javascript" src="scripts/app/gamectrl.js"></script>
+  <!-- enbuild -->
+  <script type="text/javascript">
+    $(document).ready(function () {
+      window.init_app();
+    })
+  </script>
+</body>
+</html>

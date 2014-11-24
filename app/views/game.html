@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1>Polygonal map</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-7">
+        <canvas id="gamecanvas" width="640" height="480"></canvas>
+        <button class="btn btn-sm btn-primary" ng-show="!is_game_running" ng-click="toggleGame()">Start game</button>
+        <button class="btn btn-sm btn-primary" ng-show="is_game_running" ng-click="toggleGame()">Stop game</button>
+        <div class="panel panel-warning">
+            <div class="panel-heading"><strong>Game Log</strong></div>
+            <div class="panel-body">
+                <ul class="game-log">
+                    <li ng-repeat="item in game_log">
+                        <span class="label label-{{item.status}}">&nbsp;</span>
+                        {{item.text}}
+                    </li>
+                </ul>
+            </div>
+        </div> <!-- panel -->
+    </div>
+</div>
