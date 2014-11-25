@@ -8,7 +8,7 @@ controllers.controller 'GameCtrl', ['$scope', '$rootScope', '$location', '$ancho
     # window.tile_no_y = 20
     window.boardWidth = 800
     window.boardHeight = 600
-    window.sitesNo = 50
+    window.sitesNo = 250
 #    window.tile_no_x = 15
 #    window.tile_no_y = 13
 #    window.tile_width = 30

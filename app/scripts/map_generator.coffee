@@ -124,7 +124,6 @@
       c.biome = "land"
       for he in c.halfedges
         if not he.edge.lSite or not he.edge.rSite
-          console.log "Found water"
           c.biome = "water"
           break
 
@@ -136,6 +135,5 @@
       yt: 0
       yb: @height
     @compute(@sites, @bbox)
-    console.log @diagram
     @relaxSites()
     @assignBiomes()
