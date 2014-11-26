@@ -6,7 +6,10 @@ controllers.controller 'GameCtrl',
     window.boardWidth = 800
     window.boardHeight = 600
     window.sitesNo = 250
-    window.frame_step = 300 # 300 ms as a step
+
+    window.frameStep = 30 # 30 ms as a step - for animations
+    window.moveSteps = 10
+    window.turnStep = 300 # 300 ms as a step - next round of logic
 
     # Base object arrays
     window.map = null

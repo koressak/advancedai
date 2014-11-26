@@ -30,6 +30,7 @@
     @posY = -1
     @polygon = null
 
+
     # image for outputting to the game
     @img = null
 
@@ -101,12 +102,55 @@
 
 # Extension to simple object - this can move
 @MovableGameObject = class _MovableGameObject extends @GameObject
+  constructor: ->
+    super()
+    @destPolygon = null
+    @isMoving = false
+
   randomMove: ->
     if @polygon
       n = @polygon.getNeighbors()
       if n.length > 0
         ind = Math.floor(Math.random()*n.length)
-        @setPos n[ind]
+        @startMove n[ind]
+#        @setPos n[ind]
+
+  startMove: (dest) ->
+    # Move to the dest polygon
+#    console.log "Start move"
+    if dest and not @isMoving
+#      console.log dest
+      @destPolygon = dest
+      @isMoving = true
+      @dX = (@destPolygon.getX()-@posX)/window.moveSteps
+      @dY = (@destPolygon.getY()-@posY)/window.moveSteps
+#      console.log "move to: ", @dX, @dY
+#      @distance = Math.sqrt(dX*dX+dY*dY)
+
+  move: ->
+    if @isMoving
+      # First move
+      @posX += @dX
+      @posY += @dY
+
+      rX = Math.abs(@posX-@destPolygon.getX())
+      rY = Math.abs(@posY-@destPolygon.getY())
+#      console.log "curPos: ", @posX, @posY
+#      console.log "destPos: ", @destPolygon.getX(), @destPolygon.getY()
+#      console.log "range:", rX, rY
+      if rX <= Math.abs(@dX) and rY <= Math.abs(@dY)
+        @endMove()
+
+  endMove: ->
+#    console.log "End of move.. successful"
+    if @isMoving
+      @isMoving = false
+      @polygon = @destPolygon
+      @destPolygon = null
+#      console.log @polygon
+#      console.log @destPolygon
+
+
 
 #  move: (x, y) ->
 #    # Move in positive or negative direction
