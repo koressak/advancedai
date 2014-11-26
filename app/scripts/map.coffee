@@ -1,5 +1,6 @@
-# Path Node object
 @Polygon = class _Polygon
+  # Basic map structure defining the
+  # the position objects can move to
   constructor: (cell) ->
     @cell = cell
     @neighbors = []
@@ -9,16 +10,22 @@
     @cell.site.voronoiId
 
   getSite: ->
-  @cell.site
+    @cell.site
 
   getCell: ->
-  @cell
+    @cell
 
   getElevation: ->
     @cell.elevation
 
   getDistance: ->
     @cell.distance
+
+  getX: ->
+    @cell.site.x
+
+  getY: ->
+    @cell.site.y
 
   #####################
   # Neighbor functions
@@ -38,7 +45,9 @@
       null
 
 
+################
 # Map object
+################
 @Map = class _Map
   init: (w, h, sitesNo) ->
     @width = w
@@ -52,10 +61,7 @@
     mg.generateMap()
     @diagram = mg.diagram
 
-    #######
     # Build polygons and graph neighbors
-    #######
-
     @polygons = []
     polygonsById = []
     for cell in @diagram.cells
@@ -70,6 +76,8 @@
             vc.addNeighbor polygonsById[nId]
 
 
+  getPolygons: ->
+    @polygons
 
 #  buildPathGraph: (n, landSites) ->
 #    root = new PathNode

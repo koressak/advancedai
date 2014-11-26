@@ -6,15 +6,19 @@
     processing.setup = () ->
       p.size window.boardWidth, window.boardHeight
       p.background 220
-      window.game_objects = new Array()
 
     processing.draw = () ->
-      m = window.map
-      m.drawMap()
+      g = window.g
 
-
-#        if not g.game_finished
-#            g.game_loop()
+      if not g.game_finished
+        g.gameLoop()
+        m = g.getMap()
+        if m
+          m.drawMap()
+          o = g.getGameObjects()
+          if o
+            for obj in o
+              obj.draw()
 #            map = g.get_map()
 #            map.draw()
 #        else
