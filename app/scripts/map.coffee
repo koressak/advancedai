@@ -1,11 +1,41 @@
 # Path Node object
 @Polygon = class _Polygon
-  init: (cell) ->
-    @site = cell.site
+  constructor: (cell) ->
     @cell = cell
     @neighbors = []
+    @neighborsById = []
 
+  getId: ->
+    @cell.site.voronoiId
 
+  getSite: ->
+  @cell.site
+
+  getCell: ->
+  @cell
+
+  getElevation: ->
+    @cell.elevation
+
+  getDistance: ->
+    @cell.distance
+
+  #####################
+  # Neighbor functions
+  ######################
+  addNeighbor: (n) ->
+    if n.getId() != @getId() and not @neighborsById[n.getId()]
+      @neighbors.push(n)
+      @neighborsById[n.getId()] = n
+
+  getNeighbors: ->
+    @neighbors
+
+  getNeighbor: (id) ->
+    if @neighborsById[id]
+      @neighborsById[id]
+    else
+      null
 
 
 # Map object
@@ -15,33 +45,30 @@
     @height = h
     @sitesNo = sitesNo
     @polygons = []
-#    @idsUsed = []
 
   generateMap: ->
     mg = new window.MapGenerator()
     mg.init(@width, @height, @sitesNo)
     mg.generateMap()
     @diagram = mg.diagram
-#    console.log @diagram
 
-    landSites = []
+    #######
+    # Build polygons and graph neighbors
+    #######
+
+    @polygons = []
+    polygonsById = []
     for cell in @diagram.cells
       if cell.biome == "land"
-        landSites.push cell
+        c = new Polygon(cell)
+        @polygons.push c
+        polygonsById[c.getId()] = c
 
-    for vc in landSites
-      node = new Polygon
-      node.init(vc)
-      for nId in vc.getNeighborIds()
-        for nc in landSites
-          if nc.site.voronoiId == nId
-            node.neighbors.push nc
-      @polygons.push node
+    for vc in @polygons
+      for nId in vc.getCell().getNeighborIds()
+        if polygonsById[nId]
+            vc.addNeighbor polygonsById[nId]
 
-#    console.log @landSites
-
-#    @pathRoot = @buildPathGraph(null, landSites)
-#    console.log @pathRoot
 
 
 #  buildPathGraph: (n, landSites) ->

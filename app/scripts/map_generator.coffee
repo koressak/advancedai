@@ -122,6 +122,8 @@
 
     for c in @diagram.cells
       c.biome = "land"
+      c.distance = 1
+      c.elevation = 1
       for he in c.halfedges
         if not he.edge.lSite or not he.edge.rSite
           c.biome = "water"
